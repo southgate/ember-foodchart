@@ -18,7 +18,7 @@ class HandlebarsFilter < Rake::Pipeline::Filter
 end
 
 output "public/application"
-input "ember-skeleton" do
+input "ember-food" do
 
   match "templates/*.handlebars" do
     filter HandlebarsFilter

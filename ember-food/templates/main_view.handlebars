@@ -1,0 +1,23 @@
+
+{{view FoodChart.CreateTodoView id="new-person" placeholder="What needs to be done?"}}
+
+<div id="stats">
+  {{#view Ember.Button target="FoodChart.todosController" action="clearCompletedFoodChart"}}
+    Clear Completed FoodChart
+  {{/view}}
+
+  {{FoodChart.todosController.remaining}} remaining
+</div>
+
+{{view Ember.Checkbox class="mark-all-done"
+  title="Mark All as Done"
+  disabledBinding="FoodChart.todosController.isEmpty"
+  valueBinding="FoodChart.todosController.allAreDone"}}
+
+<ul>
+{{#each FoodChart.todosController}}
+  <li {{bindAttr class="isDone"}}>
+    {{view Ember.Checkbox titleBinding="title" valueBinding="isDone"}}
+  </li>
+{{/each}}
+</ul>

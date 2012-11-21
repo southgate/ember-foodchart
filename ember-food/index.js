@@ -1,0 +1,1 @@
+FoodChart = Ember.Application.create();
