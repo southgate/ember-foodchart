@@ -1,45 +1,40 @@
-Todos.todosController = Ember.ArrayController.create({
+FoodChart.personsController = Ember.ArrayController.create({
   content: [],
 
-  createTodo: function(title) {
-    var todo = Todos.Todo.create({ title: title });
-    this.pushObject(todo);
+  createPerson: function(name) {
+    var person = FoodChart.Person.create({ name: name });
+    this.pushObject(person);
   },
-
-  clearCompletedTodos: function() {
-    this.filterProperty('isDone', true).forEach(this.removeObject, this);
-  },
-
-  remaining: function() {
-    return this.filterProperty('isDone', false).get('length');
-  }.property('@each.isDone'),
-
-  isEmpty: function() {
-    return this.get('length') === 0;
-  }.property('length'),
-
-  allAreDone: function(key, value) {
-    if (arguments.length === 2) {
-      this.setEach('isDone', value);
-
-      return value;
-    } else {
-      return !this.get('isEmpty') && this.everyProperty('isDone', true);
-    }
-  }.property('@each.isDone')
 });
 
-Todos.CreateTodoView = Ember.TextField.extend({
+FoodChart.NewPersonView = Ember.TextField.extend({
   insertNewline: function() {
-    var value = this.get('value');
+    var name = this.get('value');
 
-    if (value) {
-      Todos.todosController.createTodo(value);
+    if (name) {
+      FoodChart.personsController.createPerson(name);
       this.set('value', '');
     }
   }
 });
 
+FoodChart.PersonView = Ember.View.extend({
+  incrementBalance: function() {
+    var person = this.get('person');
+    person.increment();
+  },
+
+  decrementBalance: function() {
+    var person = this.get('person');
+    person.decrement();
+  },
+
+  destroy: function() {
+    var person = this.get('person');
+    FoodChart.personsController.removeObject(person);
+  }
+});
+
 var MainView = Ember.View.create({
-  templateName: 'main_view'
-}).append();
+  templateName: 'main_view',
+}).appendTo('#ember-skeleton');

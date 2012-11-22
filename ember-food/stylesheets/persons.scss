@@ -109,20 +109,25 @@ body {
   }
 
   h1 {
-    @include border-top-radius(8px);
-    @include background-image(linear-gradient(color-stops(white, rgb(244,244,244) 49%, rgb(237,237,237) 51%, #dedede)));
-    @include single-text-shadow(white, 0, 1px, 1px);
-
-    font-size: 15px;
-    position: absolute;
-    width: $width;
-    height: $header-height;
-    color: rgb(83,86,94);
-    top: 0;
-    left: 0;
-    padding: ($padding / 2) $padding;
-    border-bottom: $border;
+    font-size: 24px;
+    margin: 0 0 20px 0;
   }
+
+  /*h1 {*/
+    /*@include border-top-radius(8px);*/
+    /*@include background-image(linear-gradient(color-stops(white, rgb(244,244,244) 49%, rgb(237,237,237) 51%, #dedede)));*/
+    /*@include single-text-shadow(white, 0, 1px, 1px);*/
+
+    /*font-size: 15px;*/
+    /*position: absolute;*/
+    /*width: $width;*/
+    /*height: $header-height;*/
+    /*color: rgb(83,86,94);*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*padding: ($padding / 2) $padding;*/
+    /*border-bottom: $border;*/
+  /*}*/
 
   .ember-checkbox {
     input[type="checkbox"] {
