@@ -13,7 +13,7 @@ FoodChart.peopleController = Ember.ArrayController.create({
     }, 0);
 
     return sum === 0;
-  }.property('@each.balance')
+  }.property('@each.balance'),
 });
 
 FoodChart.NewPersonView = Ember.TextField.extend({

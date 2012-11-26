@@ -17,10 +17,12 @@
        <a href="#" class="btn decrement" {{action "decrementBalance"}}>
          <i class="icon-minus"></i>
        </a>
-       {{#if canDestroy}}
+       {{#if person.isBalanced }}
+        {{#if FoodChart.peopleController.isBalanced }}
          <a href="#" class="btn btn-danger btn-delete" {{action "destroy"}}>
            <i class="icon-remove icon-white"></i>
          </a>
+        {{/if}}
        {{/if}}
     </td>
   {{/view}}
