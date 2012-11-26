@@ -1,30 +1,41 @@
-<h1>Food Chart 3.0</h1>
+<h1>I am Food Chart.</h1>
 
-{{view FoodChart.NewPersonView id="new-person" placeholder="Add a person"}}
-
-<!--<div id="stats">
-  {{FoodChart.todosController.remaining}} remaining
-</div>
--->
-
-<!--{{view Ember.Checkbox class="mark-all-done"
-  title="Mark All as Done"
-  disabledBinding="FoodChart.personsController.isEmpty"
-  valueBinding="FoodChart.todosController.allAreDone"}}
--->
-
-<ul>
-{{#each FoodChart.personsController}}
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Balance</th>
+    <th></th>
+  </tr>
+{{#each FoodChart.peopleController}}
   {{#view FoodChart.PersonView personBinding="this"}}
-    <li>
-    <!-- {{view Ember.Checkbox titleBinding="name" valueBinding="isDone"}} -->
-      {{ person.name }},
-      {{ person.balance }}
-
-      <button {{action "incrementBalance"}}>+</button>
-      <button {{action "decrementBalance"}}>-</button>
-      <button {{action "destroy"}}>X</button>
-    </li>
+    <td>{{ person.name }}</td>
+    <td>{{ person.balance }}</td>
+    <td>
+       <a href="#" class="btn increment" {{action "incrementBalance"}}>
+         <i class="icon-plus"></i>
+       </a>
+       <a href="#" class="btn decrement" {{action "decrementBalance"}}>
+         <i class="icon-minus"></i>
+       </a>
+       {{#if canDestroy}}
+         <a href="#" class="btn btn-danger btn-delete" {{action "destroy"}}>
+           <i class="icon-remove icon-white"></i>
+         </a>
+       {{/if}}
+    </td>
   {{/view}}
 {{/each}}
-</ul>
+
+{{#unless FoodChart.peopleController.isBalanced }}
+<tr>
+  <td class="text-error" colspan="3">
+    <h4 class="text-error" id="chart-status">
+      Food Chart is not happy.
+    </h4>
+  </td>
+</tr>
+{{/unless}}
+
+</table>
+
+{{view FoodChart.NewPersonView id="new-person" placeholder="Add a person"}}
