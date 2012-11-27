@@ -1,9 +1,13 @@
 FoodChart.peopleController = Ember.ArrayController.create({
   content: [],
+  name: '',
 
-  createPerson: function(name) {
-    var person = FoodChart.Person.create({ name: name });
-    this.pushObject(person);
+  createPerson: function() {
+    var name = this.get('name');
+    if (name) {
+      var person = FoodChart.Person.create({ name: name });
+      this.pushObject(person);
+    }
   },
 
   isBalanced: function() {
@@ -16,14 +20,12 @@ FoodChart.peopleController = Ember.ArrayController.create({
   }.property('@each.balance'),
 });
 
-FoodChart.NewPersonView = Ember.TextField.extend({
-  insertNewline: function() {
-    var name = this.get('value');
+FoodChart.NewPersonView = Ember.TextField.extend(Ember.TargetActionSupport, {
+  valueBinding: 'FoodChart.peopleController.name',
 
-    if (name) {
-      FoodChart.peopleController.createPerson(name);
-      this.set('value', '');
-    }
+  insertNewline: function() {
+    this.triggerAction();
+    this.set('value', '');
   }
 });
 
@@ -44,11 +46,6 @@ FoodChart.PersonView = Ember.View.extend({
     var person = this.get('person');
     FoodChart.peopleController.removeObject(person);
   },
-
-  canDestroy: function() {
-    var person = this.get('person');
-    return person.balance === 0 && FoodChart.peopleController.isBalanced;
-  }.property('balance')
 });
 
 var MainView = Ember.View.create({

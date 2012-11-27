@@ -40,11 +40,16 @@
 
 </table>
 
-{{view FoodChart.NewPersonView id="new-person" placeholder="Name"}}
+<div>
+  {{view FoodChart.NewPersonView target="FoodChart.peopleController" action="createPerson" id="new-person" placeholder="Name"}}
+</div>
+{{#view Ember.Button classNames="btn btn-primary btn-submit" target="FoodChart.peopleController" action="createPerson"}}
+  Add Person
+{{/view}}
 
 <div class="footer">
   <h6>
-    Source
+    Source:
     <a href="https://github.com/fromagie/ember-foodchart" target="_new">https://github.com/fromagie/ember-foodchart</a>
   </h6>
 </div>
